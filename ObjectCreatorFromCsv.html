@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="Create Object from CSV" icon-name="standard:data_mapping">
+        <div class="slds-m-around_medium">
+            <p class="slds-m-bottom_medium">
+                Upload a CSV file to create a new custom object, its fields, and a permission set for the System Administrator.
+            </p>
+
+            <!-- File Upload Component -->
+            <lightning-input
+                type="file"
+                label="Upload CSV"
+                accept=".csv"
+                onchange={handleFileChange}>
+            </lightning-input>
+
+            <!-- Display the selected file name -->
+            <template if:true={fileName}>
+                <div class="slds-m-top_small slds-box slds-box_x-small slds-theme_shade">
+                    <p>Selected file: <strong>{fileName}</strong></p>
+                </div>
+            </template>
+
+            <!-- Process Button with updated label -->
+            <lightning-button
+                label="Create Object & Fields"
+                variant="brand"
+                onclick={handleProcess}
+                disabled={isProcessDisabled}
+                class="slds-m-top_medium">
+            </lightning-button>
+
+            <!-- Spinner -->
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Processing..." size="medium" class="slds-m-top_medium"></lightning-spinner>
+            </template>
+        </div>
+    </lightning-card>
+</template>
